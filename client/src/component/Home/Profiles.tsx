@@ -1,7 +1,17 @@
 import React from 'react';
 import IndividualProfile from './IndividualProfile';
 
-function Profiles({ profiles }) {
+type Props = {
+  profiles: {
+    userID: number,
+    fullName: string,
+    firstName: string,
+    lastName: string,
+    profile: string,
+  }[],
+}
+
+function Profiles({ profiles }: Props) {
 
   return (
     <div className='profiles container'>

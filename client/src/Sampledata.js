@@ -6,8 +6,8 @@ export const profiles = [
 ]
 
 export const photos = [
-  'https://res.cloudinary.com/dr7v4uirr/image/upload/v1687535012/images4_rynh0k.jpg',
-  'https://res.cloudinary.com/dr7v4uirr/image/upload/v1687492402/sports_wa_ytknlz.jpg'
+  {id: 1, url: 'https://res.cloudinary.com/dr7v4uirr/image/upload/v1687535012/images4_rynh0k.jpg'},
+  {id: 2, url: 'https://res.cloudinary.com/dr7v4uirr/image/upload/v1687492402/sports_wa_ytknlz.jpg'}
 ]
 
 export const upcomingEvents = [
