@@ -1,11 +1,12 @@
 import React from 'react';
+import Image from 'react-bootstrap/Image';
 
 function IndividualProfile({ profile }) {
 
   return (
     <div className='individual-profile'>
-      <img src={profile.profile} alt='user photo'/>
-      <div>{profile.firstName}</div>
+      <Image src={profile.profile} roundedCircle/>
+      <div className='name'>{profile.firstName}</div>
     </div>
   )
 }

@@ -1,0 +1,15 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+.members {
+  display: flex;
+  flex-direction: row;
+}
+
+.individual-profile {
+  text-align: center;
+}
+
+.individual-profile > img {
+  width: 120px;
+}
+

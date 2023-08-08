@@ -15,9 +15,12 @@ function Profiles({ profiles }: Props) {
 
   return (
     <div className='profiles container'>
-      {profiles.map((profile) => (
-        <IndividualProfile key={profile.userID} profile={profile}/>
-      ))}
+      <h2>Family Members</h2>
+      <div className='members container'>
+        {profiles.map((profile) => (
+          <IndividualProfile key={profile.userID} profile={profile}/>
+        ))}
+      </div>
     </div>
   )
 }
