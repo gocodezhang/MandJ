@@ -1,5 +1,6 @@
 import React from 'react';
 import Photo from './Photo';
+import Carousel from 'react-bootstrap/Carousel';
 
 type Props = {
   photos: {
@@ -11,11 +12,13 @@ type Props = {
 function Photos({ photos }: Props) {
 
   return (
-    <div className='photos container'>
+    <Carousel className="photos container" variant='dark' interval={null}>
       {photos.map((photo) => (
-        <Photo key={photo.id} url={photo.url}/>
+        <Carousel.Item key={photo.id}>
+          <img className="photo" src={photo.url} />
+        </Carousel.Item>
       ))}
-    </div>
+    </Carousel>
   )
 }
 

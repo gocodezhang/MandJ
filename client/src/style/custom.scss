@@ -1,5 +1,12 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
+.container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
+/* -------------------- Family members ------------------------------ */
+
 .members {
   display: flex;
   flex-direction: row;
@@ -11,5 +18,15 @@
 
 .individual-profile > img {
   width: 120px;
+}
+
+/* -------------------- Recent Photos ------------------------------ */
+
+.photo {
+  width: auto;
+  height: 300px;
+  max-height: 300px;
+  margin: auto;
+  display: block;
 }
 
