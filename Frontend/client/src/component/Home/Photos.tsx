@@ -1,5 +1,4 @@
 import React from 'react';
-import Photo from './Photo';
 import Carousel from 'react-bootstrap/Carousel';
 
 type Props = {
