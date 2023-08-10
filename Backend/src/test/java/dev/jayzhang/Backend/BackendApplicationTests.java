@@ -1,10 +1,10 @@
-package dev.jayzhang.FamilySpaceAPI;
+package dev.jayzhang.Backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FamilySpaceApiApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {

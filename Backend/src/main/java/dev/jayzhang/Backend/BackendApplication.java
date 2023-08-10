@@ -1,13 +1,13 @@
-package dev.jayzhang.FamilySpaceAPI;
+package dev.jayzhang.Backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FamilySpaceApiApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FamilySpaceApiApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 
 }
