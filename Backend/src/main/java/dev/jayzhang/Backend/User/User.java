@@ -1,5 +1,6 @@
 package dev.jayzhang.Backend.User;
 
+import dev.jayzhang.Backend.Family.Family;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,12 +26,19 @@ public class User {
     @JdbcTypeCode(SqlTypes.JSON)
     private Location location;
 
-    public User(String firstName, String lastName, String profilePhoto, Integer age, String gender) {
+    @ManyToOne
+    @JoinColumn(name = "family_id",
+            foreignKey = @ForeignKey(name = "FAMILY_ID_FK")
+    )
+    private Family family;
+
+    public User(String firstName, String lastName, String profilePhoto, Integer age, String gender, Family family) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.profilePhoto = profilePhoto;
         this.age = age;
         this.gender = gender;
+        this.family = family;
     }
 
 }

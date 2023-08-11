@@ -1,11 +1,10 @@
 package dev.jayzhang.Backend.User;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import dev.jayzhang.Backend.Family.Family;
+import dev.jayzhang.Backend.Family.FamilyController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -13,6 +12,8 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FamilyController familyController;
 
     @GetMapping(path = "/all")
     public Iterable getAllUsers() {
@@ -25,10 +26,26 @@ public class UserController {
     }
 
     @PostMapping
-    public String addNewUser(String firstName, String lastName, String profilePhoto, Integer age, String gender) {
-        User newUser = new User(firstName, lastName, profilePhoto, age, gender);
+    public String addNewUser(String firstName, String lastName, String profilePhoto, Integer age, String gender, String familyName) {
+        Family newFamily = new Family(familyName);
+        User newUser = new User(firstName, lastName, profilePhoto, age, gender, newFamily);
+        newFamily.addUser(newUser);
+        familyController.addFamily(newFamily);
         userRepository.save(newUser);
         return "new user is saved";
+    }
+
+    @PostMapping(path = "/{familyID}")
+    public String addNewUserWithFamily(String firstName, String lastName, String profilePhoto, Integer age, String gender,@PathVariable Integer familyID) {
+        Optional<Family> checker = familyController.getFamilyByID(familyID);
+        if (checker.isPresent()) {
+            Family family = checker.get();
+            User newUser = new User(firstName, lastName, profilePhoto, age, gender, family);
+            family.addUser(newUser);
+            userRepository.save(newUser);
+            return "new user is saved";
+        }
+        return "the family does not exist";
     }
 
     @PutMapping(path = "/{userID}")
@@ -45,7 +62,19 @@ public class UserController {
 
     @DeleteMapping(path = "/{userID}")
     public String deleteUser(@PathVariable Integer userID) {
-        userRepository.deleteById(userID);
-        return "the user is deleted";
+        Optional<User> checker = userRepository.findById(userID);
+        if (checker.isPresent()) {
+            User user = checker.get();
+            Family family = user.getFamily();
+            userRepository.deleteById(userID);
+            family.removeUser(user);
+
+            if (family.getUsers().size() == 0) {
+                familyController.deleteFamily(family);
+            }
+
+            return "the user is deleted";
+        }
+        return "the user does not exist";
     }
 }
