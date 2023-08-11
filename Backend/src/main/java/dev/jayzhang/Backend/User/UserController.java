@@ -1,9 +1,11 @@
 package dev.jayzhang.Backend.User;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -27,6 +29,18 @@ public class UserController {
         User newUser = new User(firstName, lastName, profilePhoto, age, gender);
         userRepository.save(newUser);
         return "new user is saved";
+    }
+
+    @PutMapping(path = "/{userID}")
+    public String updateLocation(@PathVariable Integer userID, Float longitude, Float latitude) {
+        Optional<User> lookUp = userRepository.findById(userID);
+        if (lookUp.isPresent()) {
+            User user = lookUp.get();
+            user.setLocation(new Location(longitude, latitude));
+            userRepository.save(user);
+            return "location is updated";
+        }
+        return "user does not exist";
     }
 
     @DeleteMapping(path = "/{userID}")

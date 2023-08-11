@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.util.Optional;
 
 @Entity
 @Data
@@ -18,6 +22,8 @@ public class User {
     private String profilePhoto;
     private Integer age;
     private String gender;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Location location;
 
     public User(String firstName, String lastName, String profilePhoto, Integer age, String gender) {
         this.firstName = firstName;
