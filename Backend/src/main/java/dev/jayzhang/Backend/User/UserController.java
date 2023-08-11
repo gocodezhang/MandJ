@@ -17,9 +17,9 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @GetMapping
-    public Optional<User> getUserById(Integer id) {
-        return userRepository.findById(id);
+    @GetMapping(path = "/{userID}")
+    public Optional<User> getUserById(@PathVariable Integer userID) {
+        return userRepository.findById(userID);
     }
 
     @PostMapping
@@ -29,9 +29,9 @@ public class UserController {
         return "new user is saved";
     }
 
-    @DeleteMapping
-    public String deleteUser(Integer id) {
-        userRepository.deleteById(id);
+    @DeleteMapping(path = "/{userID}")
+    public String deleteUser(@PathVariable Integer userID) {
+        userRepository.deleteById(userID);
         return "the user is deleted";
     }
 }
