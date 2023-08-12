@@ -30,7 +30,7 @@ public class User {
     @JoinColumn(name = "family_id",
             foreignKey = @ForeignKey(name = "FAMILY_ID_FK")
     )
-    private Family family;
+    private Family familyUser;
 
     public User(String firstName, String lastName, String profilePhoto, Integer age, String gender, Family family) {
         this.firstName = firstName;
@@ -38,7 +38,7 @@ public class User {
         this.profilePhoto = profilePhoto;
         this.age = age;
         this.gender = gender;
-        this.family = family;
+        this.familyUser = family;
     }
 
 }

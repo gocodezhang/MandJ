@@ -1,5 +1,6 @@
 package dev.jayzhang.Backend.Family;
 
+import dev.jayzhang.Backend.Photo.Photo;
 import dev.jayzhang.Backend.User.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,8 +21,11 @@ public class Family {
     private Integer id;
     private String name;
 
-    @OneToMany(mappedBy = "family", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "familyUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<User> users = new ArrayList<>();
+
+    @OneToMany(mappedBy = "familyPhoto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Photo> photos = new ArrayList<>();
 
     public Family(String name) {
         this.name = name;

@@ -65,7 +65,7 @@ public class UserController {
         Optional<User> checker = userRepository.findById(userID);
         if (checker.isPresent()) {
             User user = checker.get();
-            Family family = user.getFamily();
+            Family family = user.getFamilyUser();
             userRepository.deleteById(userID);
             family.removeUser(user);
 
