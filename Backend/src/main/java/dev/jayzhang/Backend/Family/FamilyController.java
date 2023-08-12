@@ -37,6 +37,12 @@ public class FamilyController {
         return "new family added";
     }
 
+    @DeleteMapping(path = "/{familyID}")
+    public String deleteFamily(@PathVariable Integer familyID) {
+        familyRepository.deleteById(familyID);
+        return "the family is deleted";
+    }
+
     public void addFamily(Family family) {
         familyRepository.save(family);
     }
@@ -45,9 +51,4 @@ public class FamilyController {
         familyRepository.delete(family);
     }
 
-    @DeleteMapping(path = "/{familyID}")
-    public String deleteFamily(@PathVariable Integer familyID) {
-        familyRepository.deleteById(familyID);
-        return "the family is deleted";
-    }
 }

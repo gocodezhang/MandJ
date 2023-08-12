@@ -35,4 +35,6 @@ public class Family {
         users.add(user);
     }
     public void removeUser(User user) { users.remove(user); }
+    public void addPhoto(Photo photo) { photos.add(photo); }
+    public void removePhoto(Photo photo) { photos.remove(photo); }
 }

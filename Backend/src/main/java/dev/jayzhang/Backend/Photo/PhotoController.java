@@ -19,12 +19,23 @@ public class PhotoController {
     public String addPhoto(@PathVariable Integer familyID, String url) {
         Family family = familyController.getFamilyByID(familyID).get();
         Photo photo = new Photo(url, new Timestamp(System.currentTimeMillis()), family);
+        family.addPhoto(photo);
         photoRepository.save(photo);
         return "the photo is saved";
     }
 
     @GetMapping(path = "/{familyID}")
     public Iterable getPhotos(@PathVariable Integer familyID) {
+        Family family = familyController.getFamilyByID(familyID).get();
+        return photoRepository.findPhotosByFamily(family);
+    }
 
+    @DeleteMapping(path = "/{photoID}")
+    public String deletePhoto(@PathVariable Integer photoID) {
+        Photo photo = photoRepository.findById(photoID).get();
+        Family family = photo.getFamilyPhoto();
+        photoRepository.deleteById(photoID);
+        family.removePhoto(photo);
+        return "the photo is now deleted";
     }
 }

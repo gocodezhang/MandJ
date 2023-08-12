@@ -28,7 +28,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "family_id",
-            foreignKey = @ForeignKey(name = "FAMILY_ID_FK")
+            foreignKey = @ForeignKey(name = "FAMILY_USER_ID_FK")
     )
     private Family familyUser;
 
