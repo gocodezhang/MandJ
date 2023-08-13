@@ -19,7 +19,7 @@ public class Chat {
     private String text;
     private Timestamp createdAt;
     @ManyToOne
-    @JoinColumn(name = "user_id",
+    @JoinColumn(name = "user_id", referencedColumnName = "id",
         foreignKey = @ForeignKey(name = "USER_CHAT_ID_FK")
     )
     @JoinColumn(name = "user_name", referencedColumnName = "firstName")
