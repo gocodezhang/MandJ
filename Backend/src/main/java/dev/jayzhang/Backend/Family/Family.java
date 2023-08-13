@@ -1,6 +1,7 @@
 package dev.jayzhang.Backend.Family;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import dev.jayzhang.Backend.Event.Event;
 import dev.jayzhang.Backend.Photo.Photo;
 import dev.jayzhang.Backend.User.User;
 import jakarta.persistence.*;
@@ -29,6 +30,9 @@ public class Family {
     @OneToMany(mappedBy = "familyPhoto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Photo> photos = new ArrayList<>();
+    @OneToMany(mappedBy = "familyEvent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Event> events = new ArrayList<>();
 
     public Family(String name) {
         this.name = name;
@@ -40,4 +44,6 @@ public class Family {
     public void removeUser(User user) { users.remove(user); }
     public void addPhoto(Photo photo) { photos.add(photo); }
     public void removePhoto(Photo photo) { photos.remove(photo); }
+    public void addEvent(Event event) { events.add(event); }
+    public void removeEvent(Event event) { events.remove(event); }
 }
