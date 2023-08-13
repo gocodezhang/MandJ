@@ -1,5 +1,6 @@
 package dev.jayzhang.Backend.Family;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.jayzhang.Backend.Photo.Photo;
 import dev.jayzhang.Backend.User.User;
 import jakarta.persistence.*;
@@ -22,9 +23,11 @@ public class Family {
     private String name;
 
     @OneToMany(mappedBy = "familyUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "familyPhoto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Photo> photos = new ArrayList<>();
 
     public Family(String name) {

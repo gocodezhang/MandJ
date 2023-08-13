@@ -1,5 +1,6 @@
 package dev.jayzhang.Backend.Photo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.jayzhang.Backend.Family.Family;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class Photo {
     @JoinColumn(name = "family_id",
             foreignKey = @ForeignKey(name = "FAMILY_PHOTO_ID_FK")
     )
+    @JsonBackReference
     private Family familyPhoto;
 
     public Photo(String url, Timestamp timestamp, Family family) {

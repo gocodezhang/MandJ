@@ -1,5 +1,6 @@
 package dev.jayzhang.Backend.User;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.jayzhang.Backend.Family.Family;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,7 @@ public class User {
     @JoinColumn(name = "family_id",
             foreignKey = @ForeignKey(name = "FAMILY_USER_ID_FK")
     )
+    @JsonBackReference
     private Family familyUser;
 
     public User(String firstName, String lastName, String profilePhoto, Integer age, String gender, Family family) {
