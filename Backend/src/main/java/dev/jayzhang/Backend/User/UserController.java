@@ -60,6 +60,34 @@ public class UserController {
         return "user does not exist";
     }
 
+    @PutMapping(path = "/{userID}/userinfo")
+    public String updateUserInfo(@PathVariable Integer userID, String firstName, String lastName, String profilePhoto, Integer age, String gender) {
+        User user = userRepository.findById(userID).get();
+        Optional<String> lnFirstName = Optional.ofNullable(firstName);
+        Optional<String> lnLastName = Optional.ofNullable(lastName);
+        Optional<String> lnProfilePhoto = Optional.ofNullable(profilePhoto);
+        Optional<Integer> lnAge = Optional.ofNullable(age);
+        Optional<String> lnGender = Optional.ofNullable(gender);
+
+        if (lnFirstName.isPresent()) {
+            user.setFirstName(lnFirstName.get());
+        }
+        if (lnLastName.isPresent()) {
+            user.setLastName(lnLastName.get());
+        }
+        if (lnProfilePhoto.isPresent()) {
+            user.setProfilePhoto(lnProfilePhoto.get());
+        }
+        if (lnAge.isPresent()) {
+            user.setAge(lnAge.get());
+        }
+        if (lnGender.isPresent()) {
+            user.setGender(lnGender.get());
+        }
+        userRepository.save(user);
+        return "the user information is updated";
+    }
+
     @DeleteMapping(path = "/{userID}")
     public String deleteUser(@PathVariable Integer userID) {
         Optional<User> checker = userRepository.findById(userID);
