@@ -5,6 +5,7 @@ type Props = {
   photos: {
     id: number,
     url: string,
+    timestamp: Date;
   }[],
 }
 

@@ -21,9 +21,11 @@ function Events({ events }: Props) {
         Upcoming Events
         <FontAwesomeIcon icon={faCalendarDays} />
       </h5>
-      {events.map((event, i) => (
-        <Event key={i} event={event}/>
-      ))}
+      <div className='event-list'>
+        {events.map((event, i) => (
+          <Event key={i} event={event}/>
+        ))}
+      </div>
     </div>
   )
 }
