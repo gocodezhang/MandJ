@@ -26,6 +26,7 @@ public class User {
     private String gender;
     @JdbcTypeCode(SqlTypes.JSON)
     private Location location;
+    private Integer familyID;
 
     @ManyToOne
     @JoinColumn(name = "family_id",
@@ -34,13 +35,14 @@ public class User {
     @JsonBackReference
     private Family familyUser;
 
-    public User(String firstName, String lastName, String profilePhoto, Integer age, String gender, Family family) {
+    public User(String firstName, String lastName, String profilePhoto, Integer age, String gender, Family family, Integer familyID) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.profilePhoto = profilePhoto;
         this.age = age;
         this.gender = gender;
         this.familyUser = family;
+        this.familyID = familyID;
     }
 
 }

@@ -15,7 +15,7 @@ function Events({ events }: Props) {
 
   return (
     <div className='events container'>
-      <h2>Upcoming Events</h2>
+      <h3>Upcoming Events</h3>
       {events.map((event, i) => (
         <Event key={i} event={event}/>
       ))}

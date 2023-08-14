@@ -28,9 +28,9 @@ public class UserController {
     @PostMapping
     public String addNewUser(String firstName, String lastName, String profilePhoto, Integer age, String gender, String familyName) {
         Family newFamily = new Family(familyName);
-        User newUser = new User(firstName, lastName, profilePhoto, age, gender, newFamily);
-        newFamily.addUser(newUser);
         familyController.addFamily(newFamily);
+        User newUser = new User(firstName, lastName, profilePhoto, age, gender, newFamily, newFamily.getId());
+        newFamily.addUser(newUser);
         userRepository.save(newUser);
         return "new user is saved";
     }
@@ -40,7 +40,7 @@ public class UserController {
         Optional<Family> checker = familyController.getFamilyByID(familyID);
         if (checker.isPresent()) {
             Family family = checker.get();
-            User newUser = new User(firstName, lastName, profilePhoto, age, gender, family);
+            User newUser = new User(firstName, lastName, profilePhoto, age, gender, family, familyID);
             family.addUser(newUser);
             userRepository.save(newUser);
             return "new user is saved";

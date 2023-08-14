@@ -1,24 +1,19 @@
 import React from 'react';
 import IndividualProfile from './IndividualProfile';
+import { User } from '../App';
 
 type Props = {
-  profiles: {
-    userID: number,
-    fullName: string,
-    firstName: string,
-    lastName: string,
-    profile: string,
-  }[],
+  profiles: User[]
 }
 
 function Profiles({ profiles }: Props) {
 
   return (
     <div className='profiles container'>
-      <h2>Family Members</h2>
+      <h3>Family Members</h3>
       <div className='members container'>
         {profiles.map((profile) => (
-          <IndividualProfile key={profile.userID} profile={profile}/>
+          <IndividualProfile key={profile.id} profile={profile}/>
         ))}
       </div>
     </div>

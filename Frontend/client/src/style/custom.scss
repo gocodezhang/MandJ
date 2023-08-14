@@ -3,7 +3,11 @@
 .container {
   margin-top: 10px;
   margin-bottom: 10px;
-  border: 1px solid black;
+}
+
+.home > .container {
+  border: 2px seagreen solid;
+  border-radius: 10px;
 }
 /* -------------------- Family members ------------------------------ */
 
@@ -29,4 +33,6 @@
   margin: auto;
   display: block;
 }
+
+/* -------------------- Recent Events ------------------------------ */
 
