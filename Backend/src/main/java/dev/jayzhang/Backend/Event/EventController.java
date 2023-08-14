@@ -5,7 +5,9 @@ import dev.jayzhang.Backend.Family.FamilyController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.event.InternalFrameEvent;
 import java.sql.Timestamp;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/event")
@@ -27,7 +29,35 @@ public class EventController {
         Family family = familyController.getFamilyByID(familyID).get();
         return eventRepository.findEventsByFamily(family);
     }
-    @DeleteMapping(path = "{eventID}")
+
+    @PutMapping(path = "/{eventID}")
+    public String updateEvent(@PathVariable Integer eventID, String name, String[] participants, Timestamp startTime, Timestamp endTime, String location) {
+        Event event = eventRepository.findById(eventID).get();
+        Optional<String> lnName = Optional.ofNullable(name);
+        Optional<String[]> lnParticipants = Optional.ofNullable(participants);
+        Optional<Timestamp> lnStartTime = Optional.ofNullable(startTime);
+        Optional<Timestamp> lnEndTime = Optional.ofNullable(endTime);
+        Optional<String> lnLocation = Optional.ofNullable(location);
+
+        if (lnName.isPresent()) {
+            event.setName(lnName.get());
+        }
+        if (lnParticipants.isPresent()) {
+            event.setParticipants(lnParticipants.get());
+        }
+        if (lnStartTime.isPresent()) {
+            event.setStartTime(lnStartTime.get());
+        }
+        if (lnEndTime.isPresent()) {
+            event.setEndTime(lnEndTime.get());
+        }
+        if (lnLocation.isPresent()) {
+            event.setLocation(lnLocation.get());
+        }
+        eventRepository.save(event);
+        return "the event is updated";
+    }
+    @DeleteMapping(path = "/{eventID}")
     public String deleteEvent(@PathVariable Integer eventID) {
         Event event = eventRepository.findById(eventID).get();
         Family family = event.getFamilyEvent();
