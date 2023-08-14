@@ -36,7 +36,7 @@
 ### Core Features
 
 * **Home**: you can see your family members, recent photos and upcoming family events
-* **Chat**: you can message all your family memebers in real time
+* **Chat**: you can message all your family members in real time
 * **Map**: you can access other family members location (after permission) in a map
 
 
@@ -68,7 +68,7 @@ The UI will map exactly to the core features. The UI would contains three tabs -
 
 ## Backend
 
-The backend system includes a RESTful API (built with Spring Boot) and a MySQL database (built with JPA and Spring Data JPA). The database contains _below five entities_ and the RESTful API has corresponding endpoints to support CRUD opertions for all entities.
+The backend system includes a RESTful API (built with Spring Boot) and a MySQL database (built with JPA and Spring Data JPA). The database contains **_below five entities_** and the RESTful API has corresponding endpoints to support CRUD opertions for all entities.
 * **User**: contains the user information (name, profile picture, age, gender, current location) and what family the user is associated with
 * **Family**: contains the family name
 * **Photo**: contains all photos for families
