@@ -16,7 +16,7 @@ function Event({ event }: Props) {
 
   return (
     <div className='event'>
-      <h5>{event.name}</h5>
+      <p>{event.name}</p>
       <ul className='details'>
         <li><b>Participants:</b> {`${event.participants.join(', ')}`}</li>
         <li><b>Time:</b> {`${formatedStartTime} - ${formatedEndTime}`}</li>

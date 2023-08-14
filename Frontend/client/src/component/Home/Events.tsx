@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import Event from './Event';
 
 type Props = {
@@ -15,7 +17,10 @@ function Events({ events }: Props) {
 
   return (
     <div className='events container'>
-      <h3>Upcoming Events</h3>
+      <h5>
+        Upcoming Events
+        <FontAwesomeIcon icon={faCalendarDays} />
+      </h5>
       {events.map((event, i) => (
         <Event key={i} event={event}/>
       ))}

@@ -1,15 +1,25 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
-.container {
-  margin-top: 10px;
-  margin-bottom: 10px;
+body {
+ background-color: #e5e5e5;
 }
 
+/* ------------------------------------------------------------------
+---------------------------- Home tab -------------------------------
+--------------------------------------------------------------------- */
+
 .home > .container {
-  border: 2px seagreen solid;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  // border: 2px seagreen solid;
   border-radius: 10px;
+  background-color: #ffffff;
 }
 /* -------------------- Family members ------------------------------ */
+
+.profiles > p {
+  font-size: larger;
+}
 
 .members {
   display: flex;
@@ -35,4 +45,24 @@
 }
 
 /* -------------------- Recent Events ------------------------------ */
+
+.events {
+  padding: 12px;
+}
+.events > p {
+  font-size: larger;
+}
+
+.event {
+  border: 1px solid black;
+  border-radius: 10px;
+  max-width: 480px;
+  margin: 8px;
+}
+
+.event > p {
+  text-align: center;
+  font-size: large;
+  font-weight: 600;
+}
 

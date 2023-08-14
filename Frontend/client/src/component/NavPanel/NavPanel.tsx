@@ -9,7 +9,7 @@ function NavPanel() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand>FamilySpace</Navbar.Brand>
+        <Navbar.Brand className='h1'>FamilySpace</Navbar.Brand>
         <Nav>
           <Nav.Link as={Link} to="/">Home</Nav.Link>
           <Nav.Link as={Link} to="/chat">Chat</Nav.Link>
