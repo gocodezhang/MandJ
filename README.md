@@ -68,12 +68,12 @@ The UI will map exactly to the core features. The UI would contains three tabs -
 
 ## Backend
 
-The backend system includes a RESTful API (built with Spring Boot) and a MySQL database (built with JPA and Spring Data JPA). The database contains below five entities and the RESTful API has corresponding endpoints to support CRUD opertions for all entities.
-* User: contains the user information (name, profile picture, age, gender, current location) and what family the user is associated with
-* Family: contains the family name
-* Photo: contains all photos for families
-* Event: contains all events for families
-* Chat: contains all messages for families
+The backend system includes a RESTful API (built with Spring Boot) and a MySQL database (built with JPA and Spring Data JPA). The database contains _below five entities_ and the RESTful API has corresponding endpoints to support CRUD opertions for all entities.
+* **User**: contains the user information (name, profile picture, age, gender, current location) and what family the user is associated with
+* **Family**: contains the family name
+* **Photo**: contains all photos for families
+* **Event**: contains all events for families
+* **Chat**: contains all messages for families
 
 ### Database
 Please note below diagram for attributes for entities and their relationships
@@ -84,13 +84,13 @@ Please note below diagram for attributes for entities and their relationships
 #### User services
 * Create
   1. **endpoint**: `"/user"`; **definition**: create a new user and create a new family to associate with the user
-  1. **endpoint**: `"/user/{familyID}"`; **definition**: create a new user and add the user to the family
+  2. **endpoint**: `"/user/{familyID}"`; **definition**: create a new user and add the user to the family
 * Read
   1. **endpoint**: `"/user/all"`; **definition**: get all users
   2. **endpoint**: `"/user/{userID}"`; **definition**: get a user
 * Update
   1. **endpoint**: `"/user/{userID}"`; **definition**: update user location
-  1. **endpoint**: `"/user/{userID}/userinfo"`; **definition**: update user information (e.g name, age and gender)
+  2. **endpoint**: `"/user/{userID}/userinfo"`; **definition**: update user information (e.g name, age and gender)
 * Delete - **endpoint**: `"/user/{userID}"`; **definition**: Delete a user
 
 #### Family services
