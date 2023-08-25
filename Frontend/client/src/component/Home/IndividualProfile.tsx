@@ -1,7 +1,12 @@
 import React from 'react';
 import Image from 'react-bootstrap/Image';
+import { User } from '../App';
 
-function IndividualProfile({ profile }) {
+type Props = {
+  profile: User;
+}
+
+function IndividualProfile({ profile }: Props) {
 
   return (
     <div className='individual-profile'>

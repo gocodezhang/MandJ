@@ -24,16 +24,27 @@ body {
 .members {
   display: flex;
   flex-direction: row;
-  gap: 26px;
+  gap: 40px;
 }
 
 .individual-profile {
   text-align: center;
+  position: relative;
 }
 
 .individual-profile > img {
   width: 100px;
   height: 100px;
+}
+
+.profile-uploader {
+  position: absolute;
+  right: 5%;
+  top: 1%;
+}
+
+#profile-upload {
+  display: none;
 }
 
 /* -------------------- Recent Photos ------------------------------ */

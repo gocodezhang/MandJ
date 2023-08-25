@@ -8,8 +8,10 @@ import NavPanel from './NavPanel/NavPanel';
 import '../style/custom.scss';
 
 type AppContextType = {
+  userID: Number;
   user: User;
   family: Family;
+  setUser: React.Dispatch<React.SetStateAction<User>>;
   setFamily: React.Dispatch<React.SetStateAction<Family>>;
 }
 export const AppContext = createContext<AppContextType>({} as AppContextType);
@@ -54,7 +56,7 @@ function App() {
   },[])
 
   return (
-    <AppContext.Provider value={{user, family, setFamily}}>
+    <AppContext.Provider value={{userID, user, setUser, family, setFamily}}>
       <NavPanel />
       <Routes>
         <Route path='/' element={<Home />}/>

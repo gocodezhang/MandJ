@@ -76,6 +76,7 @@ public class UserController {
             user.setLastName(lnLastName.get());
         }
         if (lnProfilePhoto.isPresent()) {
+            System.out.println(lnProfilePhoto.get());
             user.setProfilePhoto(lnProfilePhoto.get());
         }
         if (lnAge.isPresent()) {

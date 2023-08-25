@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import IndividualProfile from './IndividualProfile';
+import OwnerProfile from './OwnerProfile';
+import { AppContext } from '../App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../App';
@@ -9,6 +11,8 @@ type Props = {
 }
 
 function Profiles({ profiles }: Props) {
+  const { user } = useContext(AppContext);
+  const profilesWithoutCurrUser = profiles.filter((profile) => (profile.id !== user.id));
 
   return (
     <div className='profiles container'>
@@ -17,7 +21,8 @@ function Profiles({ profiles }: Props) {
         <FontAwesomeIcon icon={faUser} />
       </h5>
       <div className='members container'>
-        {profiles.map((profile) => (
+        <OwnerProfile key={user.id} profile={user} />
+        {profilesWithoutCurrUser.map((profile) => (
           <IndividualProfile key={profile.id} profile={profile}/>
         ))}
       </div>
