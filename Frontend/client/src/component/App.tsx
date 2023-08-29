@@ -8,11 +8,12 @@ import NavPanel from './NavPanel/NavPanel';
 import '../style/custom.scss';
 
 type AppContextType = {
-  userID: Number;
   user: User;
   family: Family;
+  homeRefresh: boolean;
   setUser: React.Dispatch<React.SetStateAction<User>>;
   setFamily: React.Dispatch<React.SetStateAction<Family>>;
+  setHomeRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const AppContext = createContext<AppContextType>({} as AppContextType);
 
@@ -44,6 +45,7 @@ function App() {
   const [userID, setUserID] = useState(2);
   const [user, setUser] = useState<User>({} as User);
   const [family, setFamily] = useState<Family>({} as Family);
+  const [homeRefresh, setHomeRefresh] = useState<boolean>(false);
 
   useEffect(() => {
     const url = '//localhost:8080/user';
@@ -51,12 +53,13 @@ function App() {
       .then((response) => {
         console.log(response.data)
         setUser(response.data);
+        setHomeRefresh(!homeRefresh);
       })
       .catch((err) => (console.log(err)));
   },[])
 
   return (
-    <AppContext.Provider value={{userID, user, setUser, family, setFamily}}>
+    <AppContext.Provider value={{user, setUser, family, setFamily, homeRefresh, setHomeRefresh}}>
       <NavPanel />
       <Routes>
         <Route path='/' element={<Home />}/>

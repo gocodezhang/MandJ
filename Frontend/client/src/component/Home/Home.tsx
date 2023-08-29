@@ -7,7 +7,7 @@ import { AppContext } from '../App';
 import { profiles, photos, upcomingEvents } from '../../Sampledata.js';
 
 function Home() {
-  const { user, family, setFamily } = useContext(AppContext);
+  const { user, family, setFamily, homeRefresh } = useContext(AppContext);
 
   useEffect(() => {
     if (user && user.familyID) {
@@ -20,7 +20,7 @@ function Home() {
         })
         .catch((err) => (console.log(err)));
     }
-  },[user])
+  },[homeRefresh])
 
 
   return Object.keys(family).length === 0 ? null : (
