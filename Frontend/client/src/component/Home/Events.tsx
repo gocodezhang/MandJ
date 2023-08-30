@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Event from './Event';
+import EventForm from './EventForm';
 
 type Props = {
   events: {
@@ -14,6 +15,7 @@ type Props = {
 }
 
 function Events({ events }: Props) {
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   return (
     <div className='events container'>
@@ -26,6 +28,11 @@ function Events({ events }: Props) {
           <Event key={i} event={event}/>
         ))}
       </div>
+      <button type='button' id='event-adder' onClick={() => (setShowForm(true))}>
+        Add Event
+        <FontAwesomeIcon icon={faPlus} />
+      </button>
+      <EventForm showForm={showForm} setShowForm={setShowForm} />
     </div>
   )
 }

@@ -84,6 +84,8 @@ body {
 
 .events {
   padding: 12px;
+  position: relative;
+
 }
 
 .events > p {
@@ -94,7 +96,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 160px;
+  max-height: 316px;
   width: 480px;
   overflow-y: auto;
   padding: 8px;
@@ -117,5 +119,14 @@ body {
 
 .event .details {
   list-style-type: none;
+}
+
+#event-adder {
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
