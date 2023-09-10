@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import $ from "jquery";
+import axios from "axios";
+import { format } from "date-fns";
 import Form from 'react-bootstrap/Form';
 import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/Button';
@@ -21,7 +23,7 @@ type FormObject = {
 }
 
 function EventForm({ showForm, setShowForm}: Props) {
-  const { family } = useContext(AppContext);
+  const { family, homeRefresh, setHomeRefresh } = useContext(AppContext);
   const [formObj, setFormObj] = useState<FormObject>({
     name: '',
     participants: [],
@@ -31,9 +33,9 @@ function EventForm({ showForm, setShowForm}: Props) {
   });
 
   function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    var value;
-    if (e.target.name == 'participants') {
-      value = $("#participants").val();
+    let value;
+    if (e.target.name === 'startTime' || e.target.name === 'endTime') {
+      value = format(new Date(e.target.value), 'yyyy-MM-dd HH:mm:ss');
     } else {
       value = e.target.value;
     }
@@ -41,6 +43,30 @@ function EventForm({ showForm, setShowForm}: Props) {
       ...formObj,
       [e.target.name]: value,
     })
+  }
+
+  function onChangeHandlerPart(e: React.ChangeEvent<HTMLSelectElement>) {
+    var value = $("#participants").val();
+    setFormObj({
+      ...formObj,
+      [e.target.name]: value,
+    })
+  }
+
+  function addEvent(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    let data = new FormData();
+    for (const key in formObj) {
+      data.append(key, formObj[key]);
+    };
+    const url = `//localhost:8080/event/${family.id}`;
+    axios.post(url, data)
+      .then((result) => {
+        console.log(result);
+        setShowForm(false);
+        setHomeRefresh(!homeRefresh);
+      })
+      .catch((err) => (console.log(err)));
   }
 
   return (
@@ -56,9 +82,9 @@ function EventForm({ showForm, setShowForm}: Props) {
           </Form.Group>
           <Form.Group controlId="event-participant">
             <Form.Label>Participants</Form.Label>
-            <Form.Select id="participants" name="participants" multiple value={formObj.participants} onChange={onChangeHandler}>
+            <Form.Select id="participants" name="participants" multiple value={formObj.participants} onChange={onChangeHandlerPart}>
               {family.users.map((user) => (
-                <option value={user.id} key={user.id}>{`${user.firstName} ${user.lastName}`}</option>
+                <option value={`${user.firstName} ${user.lastName}`} key={user.id}>{`${user.firstName} ${user.lastName}`}</option>
               ))}
             </Form.Select>
           </Form.Group>
@@ -78,6 +104,9 @@ function EventForm({ showForm, setShowForm}: Props) {
           </Form.Group>
         </Form>
       </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={addEvent}>Submit</Button>
+      </Modal.Footer>
     </Modal>
 
   )
