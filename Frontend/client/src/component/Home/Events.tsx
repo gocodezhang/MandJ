@@ -6,6 +6,7 @@ import EventForm from './EventForm';
 
 type Props = {
   events: {
+    id: number,
     name: string,
     participants: string[],
     startTime: string,
@@ -24,15 +25,16 @@ function Events({ events }: Props) {
         <FontAwesomeIcon icon={faCalendarDays} />
       </h5>
       <div className='event-list'>
-        {events.map((event, i) => (
-          <Event key={i} event={event}/>
+        {events.map((event) => (
+          <Event key={event.id} event={event}
+          eventForm={EventForm}/>
         ))}
       </div>
       <button type='button' id='event-adder' onClick={() => (setShowForm(true))}>
         Add Event
         <FontAwesomeIcon icon={faPlus} />
       </button>
-      <EventForm showForm={showForm} setShowForm={setShowForm} />
+      <EventForm showForm={showForm} setShowForm={setShowForm} event={null}/>
     </div>
   )
 }

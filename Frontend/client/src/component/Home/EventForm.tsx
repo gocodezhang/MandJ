@@ -12,6 +12,16 @@ import { AppContext } from "../App";
 type Props = {
   showForm: boolean;
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  event: Event | null;
+}
+
+type Event = {
+  id: number;
+  name: string,
+  participants: string[],
+  startTime: string,
+  endTime: string,
+  location: string,
 }
 
 type FormObject = {
@@ -22,14 +32,14 @@ type FormObject = {
   location: string;
 }
 
-function EventForm({ showForm, setShowForm}: Props) {
+function EventForm({ showForm, setShowForm, event }: Props) {
   const { family, homeRefresh, setHomeRefresh } = useContext(AppContext);
   const [formObj, setFormObj] = useState<FormObject>({
-    name: '',
-    participants: [],
-    startTime: '',
-    endTime: '',
-    location: '',
+    name: event ? event.name : '',
+    participants: event ? event.participants : [],
+    startTime: event ? format(new Date(event.startTime),'yyyy-MM-dd HH:mm:ss') : '',
+    endTime: event ? format(new Date(event.endTime),'yyyy-MM-dd HH:mm:ss') : '',
+    location: event ? event.location : '',
   });
 
   function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
