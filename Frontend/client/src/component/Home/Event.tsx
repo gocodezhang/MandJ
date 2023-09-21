@@ -40,12 +40,14 @@ function Event({ event }: Props) {
         <li><b>Time:</b> {`${formatedStartTime} - ${formatedEndTime}`}</li>
         <li><b>Location:</b> {event.location}</li>
       </ul>
-      <button type='button' onClick={deleteHandler}>
-        <FontAwesomeIcon icon={faTrash} />
-      </button>
-      <button type='button' onClick={() => (setEditForm(!editForm))}>
-        <FontAwesomeIcon icon={faFilePen} />
-      </button>
+      <div className='event-buttons'>
+        <button type='button' onClick={deleteHandler}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+        <button type='button' onClick={() => (setEditForm(!editForm))}>
+          <FontAwesomeIcon icon={faFilePen} />
+        </button>
+      </div>
       <EventForm showForm={editForm} setShowForm={setEditForm} event={event} />
     </div>
   )

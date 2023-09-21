@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import $ from "jquery";
 import axios from "axios";
 import { format } from "date-fns";
@@ -34,13 +34,22 @@ type FormObject = {
 
 function EventForm({ showForm, setShowForm, event }: Props) {
   const { family, homeRefresh, setHomeRefresh } = useContext(AppContext);
-  const [formObj, setFormObj] = useState<FormObject>({
-    name: event ? event.name : '',
-    participants: event ? event.participants : [],
-    startTime: event ? format(new Date(event.startTime),'yyyy-MM-dd HH:mm:ss') : '',
-    endTime: event ? format(new Date(event.endTime),'yyyy-MM-dd HH:mm:ss') : '',
-    location: event ? event.location : '',
-  });
+  const [formObj, setFormObj] = useState<FormObject>(resetFormObj());
+
+  function resetFormObj() {
+    const obj = {
+      name: event ? event.name : '',
+      participants: event ? event.participants : [],
+      startTime: event ? format(new Date(event.startTime),'yyyy-MM-dd HH:mm:ss') : '',
+      endTime: event ? format(new Date(event.endTime),'yyyy-MM-dd HH:mm:ss') : '',
+      location: event ? event.location : '',
+    };
+    return obj;
+  }
+
+  useEffect(() => {
+    setFormObj(resetFormObj());
+  },[showForm]);
 
   function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     let value;
@@ -63,24 +72,33 @@ function EventForm({ showForm, setShowForm, event }: Props) {
     })
   }
 
-  function addEvent(e: React.MouseEvent<HTMLButtonElement>) {
+  function closeHanlder() {
+    setShowForm(!showForm);
+  }
+
+  function addOrUpdateEvent(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     let data = new FormData();
     for (const key in formObj) {
       data.append(key, formObj[key]);
     };
-    const url = `//localhost:8080/event/${family.id}`;
-    axios.post(url, data)
+    const url = event ? `//localhost:8080/event/${event.id}` : `//localhost:8080/event/${family.id}`;
+    axios({
+      method: event ? 'put' : 'post',
+      url: url,
+      data: data,
+    })
       .then((result) => {
         console.log(result);
         setShowForm(false);
+        // setFormObj(resetFormObj());
         setHomeRefresh(!homeRefresh);
       })
       .catch((err) => (console.log(err)));
   }
 
   return (
-    <Modal centered show={showForm} onHide={() => (setShowForm(false))}>
+    <Modal centered show={showForm} onHide={closeHanlder}>
       <Modal.Header closeButton>
         <Modal.Title>Add your new event!</Modal.Title>
       </Modal.Header>
@@ -115,7 +133,7 @@ function EventForm({ showForm, setShowForm, event }: Props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={addEvent}>Submit</Button>
+        <Button onClick={addOrUpdateEvent}>Submit</Button>
       </Modal.Footer>
     </Modal>
 

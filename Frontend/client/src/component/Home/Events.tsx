@@ -26,8 +26,7 @@ function Events({ events }: Props) {
       </h5>
       <div className='event-list'>
         {events.map((event) => (
-          <Event key={event.id} event={event}
-          eventForm={EventForm}/>
+          <Event key={event.id} event={event} />
         ))}
       </div>
       <button type='button' id='event-adder' onClick={() => (setShowForm(true))}>
