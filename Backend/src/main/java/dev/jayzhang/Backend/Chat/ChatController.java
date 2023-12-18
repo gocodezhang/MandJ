@@ -27,9 +27,11 @@ public class ChatController {
     public void addMessage(@PathVariable Integer userID, String text) {
         User user = userController.getUserById(userID).get();
         Family family = user.getFamilyUser();
+        Integer familyID = family.getId();
         Chat chat = new Chat(text, new Timestamp(System.currentTimeMillis()), user, family);
         chatRepository.save(chat);
-        template.convertAndSend("/familyChat/testing",chat);
+
+        template.convertAndSend("/familyChat/" + familyID,chat);
     }
     @GetMapping(path = "/{familyID}")
     public Iterable getMessages(@PathVariable Integer familyID) {

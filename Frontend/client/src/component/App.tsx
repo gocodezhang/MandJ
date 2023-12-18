@@ -33,7 +33,7 @@ export type User = {
   location: Location | null;
 }
 
-type Family = {
+export type Family = {
   id: number;
   name: string;
   events: Array<any>;

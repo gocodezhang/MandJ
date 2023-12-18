@@ -3,6 +3,8 @@ import axios from 'axios';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 function MessageInput({ user }) {
     const [newMessage, setNewMessage] = useState('')
@@ -20,15 +22,15 @@ function MessageInput({ user }) {
     }
 
     return (
-        <InputGroup>
+        <InputGroup className='container px-0'>
             <Form.Control
                 placeholder="Enter message"
                 aria-describedby="submit-message"
                 value={newMessage}
                 onChange={(e) => (setNewMessage(e.target.value))}
             />
-            <Button type="button" variant="outline-secondary" id="submit-message" onClick={handleSubmitMessage}>
-                Button
+            <Button type="button" variant="outline-primary" id="submit-message" onClick={handleSubmitMessage}>
+                <FontAwesomeIcon icon={faPaperPlane} />
             </Button>
         </InputGroup>
     )

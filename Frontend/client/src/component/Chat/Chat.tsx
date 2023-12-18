@@ -15,7 +15,6 @@ function Chat() {
       onWebSocketError={(err) => (console.log(err))}
       onStompError={(frame) => (console.log(frame))}
     >
-      This page is for chat!
       <FamilyMessages user={user}/>
       <MessageInput user={user}/>
     </StompSessionProvider>

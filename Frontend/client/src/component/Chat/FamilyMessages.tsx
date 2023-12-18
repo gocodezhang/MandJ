@@ -1,25 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
-import { AppContext } from '../App';
 import { useSubscription } from 'react-stomp-hooks';
+import { Family, User } from '../App';
+import SingleMessage from './SingleMessage';
 
 type Message = {
     id: number;
     createdAt: string;
     text: string;
-    familyId: number;
-    userId: number;
-    userName: string;
+    user: User;
+    familyChat: Family;
   }
   
 type Messages = Message[];
 
 function FamilyMessages({ user }) {
   const [messages, setMessages] = useState<Messages>([] as Messages);
-  function subscriptionCB({ body }) {
-    const message = JSON.parse(body)
-    console.log(message)
-  }
+  const lastmessageRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
     const url = `//localhost:8080/chat/${user.familyID}`;
@@ -30,16 +27,23 @@ function FamilyMessages({ user }) {
       .catch((err) => (console.log(err)))
   },[])
 
-  useSubscription('/familyChat/testing', (IMessage) => {
+  useEffect(() => {
+    lastmessageRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    })
+  },[messages])
+
+  useSubscription(`/familyChat/${user.familyID}`, (IMessage) => {
     const message = JSON.parse(IMessage.body)
     setMessages([...messages, message])
   })
 
   return (
-    <div>
+    <div className='container bg-white rounded p-3 my-2 overflow-y-auto' style={{height: '650px'}} >
       {messages.map((message) => (
-        <a key={message.id}>{message.text}</a>
+        <SingleMessage key={message.id} message={message} currentUser={user} />
       ))}
+      <div ref={lastmessageRef}></div>
     </div>
   )
 }
