@@ -17,7 +17,7 @@ type AppContextType = {
 }
 export const AppContext = createContext<AppContextType>({} as AppContextType);
 
-type Location = {
+export type Location = {
   longitude: number;
   latitude: number;
 }

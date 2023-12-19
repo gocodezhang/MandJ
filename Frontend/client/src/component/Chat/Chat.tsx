@@ -15,8 +15,11 @@ function Chat() {
       onWebSocketError={(err) => (console.log(err))}
       onStompError={(frame) => (console.log(frame))}
     >
-      <FamilyMessages user={user}/>
-      <MessageInput user={user}/>
+      {Object.keys(user).length && 
+      <>
+        <FamilyMessages user={user}/>
+        <MessageInput user={user}/>
+      </>}
     </StompSessionProvider>
   )
 }

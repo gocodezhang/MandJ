@@ -1,5 +1,6 @@
 package dev.jayzhang.Backend.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dev.jayzhang.Backend.Family.Family;
 import dev.jayzhang.Backend.Family.FamilyController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +50,12 @@ public class UserController {
     }
 
     @PutMapping(path = "/{userID}")
-    public String updateLocation(@PathVariable Integer userID, Float longitude, Float latitude) {
+    public String updateLocation(@PathVariable Integer userID, @RequestBody Location location) {
+        System.out.println(location);
         Optional<User> lookUp = userRepository.findById(userID);
         if (lookUp.isPresent()) {
             User user = lookUp.get();
-            user.setLocation(new Location(longitude, latitude));
+            user.setLocation(location);
             userRepository.save(user);
             return "location is updated";
         }
