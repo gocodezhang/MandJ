@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
-import { AppContext, Location } from '../App';
+import { AppContext, Location, Users } from '../App';
 import Spinner from 'react-bootstrap/Spinner';
+import Marker from './Marker';
 
-function Map() {
-  const { user } = useContext(AppContext)
+function Map({ user }) {
+  const { family } = useContext(AppContext)
   const [userLocation, setUserLocation] = useState<null | Location>(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [usersForMarker, setUsersForMarker] = useState<Users>([])
 
   useEffect(() => {
-    if (Object.keys(user).length && navigator.geolocation) {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((geoPosition) => {
         const { coords, timestamp } = geoPosition
         const url = `//localhost:8080/user/${user.id}`
@@ -32,7 +34,14 @@ function Map() {
         setErrorMessage('Your location information is required to enable map feature')
       })
     }
-  },[user])
+  },[])
+
+  useEffect(() => {
+    if (family.users) {
+      const renderUsers = family.users.filter((user) => (user.location))
+      setUsersForMarker(renderUsers)
+    }
+  },[family])
 
   return (
     <div className='container my-3' style={{height: '650px'}}>
@@ -50,6 +59,14 @@ function Map() {
           defaultCenter={{lat: userLocation?.latitude, lng: userLocation?.longitude}}
           defaultZoom={11}
         >
+          {usersForMarker.map((user) => (
+            <Marker 
+              key={user.id}
+              lat={user.location?.latitude}
+              lng={user.location?.longitude}
+              user={user}
+            />
+          ))}
         </GoogleMapReact>
       }
     </div>

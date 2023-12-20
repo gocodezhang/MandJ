@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import Home from './Home/Home';
 import Chat from './Chat/Chat';
-import Map from './Map/Map';
+import MapTab from './Map/MapTab';
 import NavPanel from './NavPanel/NavPanel';
 import '../style/custom.scss';
 
@@ -32,6 +32,8 @@ export type User = {
   familyID: number;
   location: Location | null;
 }
+
+export type Users = User[];
 
 export type Family = {
   id: number;
@@ -64,7 +66,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/chat' element={<Chat />} />
-        <Route path='/map' element={<Map />}/>
+        <Route path='/map' element={<MapTab />}/>
       </Routes>
     </AppContext.Provider>
   )
