@@ -21,6 +21,11 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    @GetMapping(path = "/familyUsers/{familyID}")
+    public Iterable getFamilyUsers(@PathVariable Integer familyID)  {
+        return userRepository.findUsersByFamilyID(familyID);
+    }
+
     @GetMapping(path = "/{userID}")
     public Optional<User> getUserById(@PathVariable Integer userID) {
         return userRepository.findById(userID);

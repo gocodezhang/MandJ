@@ -6,7 +6,6 @@ import Spinner from 'react-bootstrap/Spinner';
 import Marker from './Marker';
 
 function Map({ user }) {
-  const { family } = useContext(AppContext)
   const [userLocation, setUserLocation] = useState<null | Location>(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [usersForMarker, setUsersForMarker] = useState<Users>([])
@@ -26,6 +25,13 @@ function Map({ user }) {
               longitude: coords.longitude,
               latitude: coords.latitude,
             })
+            const familyUsersURL = `//localhost:8080/user/familyUsers/${user.familyID}`
+            return axios.get(familyUsersURL)
+          })
+          .then(({ data }) => {
+            console.log('fetch users location')
+            const usersWithLocation = data.filter((user) => (user.location))
+            setUsersForMarker(usersWithLocation)
           })
           .catch((err) => (console.log(err)))
       },
@@ -36,12 +42,14 @@ function Map({ user }) {
     }
   },[])
 
-  useEffect(() => {
-    if (family.users) {
-      const renderUsers = family.users.filter((user) => (user.location))
-      setUsersForMarker(renderUsers)
-    }
-  },[family])
+  // useEffect(() => {
+  //   const familyUsersURL = `//localhost:8080/user/familyUsers/${user.familyID}`
+  //   axios.get(familyUsersURL)
+  //     .then(({ data }) => {
+  //       const usersWithLocation = data.filter((user) => (user.location))
+  //       setUsersForMarker(usersWithLocation)
+  //     })
+  // },[])
 
   return (
     <div className='container my-3' style={{height: '650px'}}>
