@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Marker({ user }) {
+function Marker(props) {
   return (
-    <div>{user.firstName}</div>
+    <div>{props.user.firstName}</div>
   )
 }
 

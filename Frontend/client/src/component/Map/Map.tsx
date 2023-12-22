@@ -1,14 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import GoogleMapReact from 'google-map-react';
+// import GoogleMapReact from 'google-map-react';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { AppContext, Location, Users } from '../App';
 import Spinner from 'react-bootstrap/Spinner';
-import Marker from './Marker';
+// import Marker from './Marker';
 
 function Map({ user }) {
   const [userLocation, setUserLocation] = useState<null | Location>(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [usersForMarker, setUsersForMarker] = useState<Users>([])
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'users-location',
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY as string,
+  })
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -61,21 +67,19 @@ function Map({ user }) {
       {!errorMessage && !userLocation && 
         <div className='d-flex w-100 h-100 justify-content-center align-items-center'><Spinner animation='border'/></div>
       }
-      {!errorMessage && userLocation && 
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
-          defaultCenter={{lat: userLocation?.latitude, lng: userLocation?.longitude}}
-          defaultZoom={11}
+      {!errorMessage && userLocation && isLoaded &&
+        <GoogleMap
+          mapContainerStyle={{height: '100%', width: '100%'}}
+          center={{lat: userLocation.latitude, lng: userLocation.longitude}}
+          zoom={10}
         >
-          {usersForMarker.map((user) => (
-            <Marker 
-              key={user.id}
-              lat={user.location?.latitude}
-              lng={user.location?.longitude}
-              user={user}
+          {usersForMarker.map((userForMarker) => (
+            <Marker
+              key={userForMarker.id}
+              position={{lat: userForMarker.location.latitude, lng: userForMarker.location.longitude}}
             />
           ))}
-        </GoogleMapReact>
+        </GoogleMap>
       }
     </div>
   )
