@@ -17,7 +17,7 @@ function OwnerProfile({ profile }: Props) {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
       reader.addEventListener('load', () => {
-        const url = 'https://api.cloudinary.com/v1_1/dr7v4uirr/image/upload';
+        const url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload`;
         const data = {
           file: reader.result,
           upload_preset: 'c0f3xm7p',

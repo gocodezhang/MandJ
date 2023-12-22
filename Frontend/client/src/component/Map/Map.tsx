@@ -34,8 +34,9 @@ function Map({ user }) {
             const familyUsersURL = `//localhost:8080/user/familyUsers/${user.familyID}`
             return axios.get(familyUsersURL)
           })
-          .then(({ data }) => {
+          .then((response: { data: Users }) => {
             console.log('fetch users location')
+            const { data } = response;
             const usersWithLocation = data.filter((user) => (user.location))
             setUsersForMarker(usersWithLocation)
           })
@@ -77,6 +78,7 @@ function Map({ user }) {
             <Marker
               key={userForMarker.id}
               position={{lat: userForMarker.location.latitude, lng: userForMarker.location.longitude}}
+              label={userForMarker.firstName}
             />
           ))}
         </GoogleMap>
