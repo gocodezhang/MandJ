@@ -11,7 +11,7 @@ function Home() {
 
   useEffect(() => {
     if (user && user.familyID) {
-      const url = '//localhost:8080/family';
+      const url = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/family`;
       const { familyID } = user
       axios.get(`${url}/${familyID}`)
         .then((response) => {

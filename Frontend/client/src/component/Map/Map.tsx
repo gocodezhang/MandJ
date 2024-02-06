@@ -20,7 +20,7 @@ function Map({ user }) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((geoPosition) => {
         const { coords, timestamp } = geoPosition
-        const url = `//localhost:8080/user/${user.id}`
+        const url = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/user/${user.id}`
 
         axios.put(url, {
           longitude: coords.longitude,
@@ -31,7 +31,7 @@ function Map({ user }) {
               longitude: coords.longitude,
               latitude: coords.latitude,
             })
-            const familyUsersURL = `//localhost:8080/user/familyUsers/${user.familyID}`
+            const familyUsersURL = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/user/familyUsers/${user.familyID}`
             return axios.get(familyUsersURL)
           })
           .then((response: { data: Users }) => {

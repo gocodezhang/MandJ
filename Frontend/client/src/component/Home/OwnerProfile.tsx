@@ -26,7 +26,7 @@ function OwnerProfile({ profile }: Props) {
         axios.post(url, data)
           .then((result) => (result.data.secure_url))
           .then((apiURL) => {
-            const url = `//localhost:8080/user/${profile.id}/userinfo`;
+            const url = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/user/${profile.id}/userinfo`;
             const data = new FormData();
             data.append('profilePhoto', apiURL)
             profilePhoto = apiURL;

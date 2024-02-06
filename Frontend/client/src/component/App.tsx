@@ -50,7 +50,7 @@ function App() {
   const [homeRefresh, setHomeRefresh] = useState<boolean>(false);
 
   useEffect(() => {
-    const url = '//localhost:8080/user';
+    const url = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/user`;
     axios.get(`${url}/${userID}`)
       .then((response) => {
         console.log(response.data)

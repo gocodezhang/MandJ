@@ -29,7 +29,7 @@ function Photos({ photos }: Props) {
         axios.post(url, data)
           .then((result) => (result.data.secure_url))
           .then((apiURL) => {
-            const url = `//localhost:8080/photo/${user.familyID}`;
+            const url = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/photo/${user.familyID}`;
             const data = new FormData();
             data.append('url', apiURL)
             familyPhoto = apiURL;

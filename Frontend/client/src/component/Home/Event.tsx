@@ -23,7 +23,7 @@ function Event({ event }: Props) {
   const formatedEndTime = format(new Date(event.endTime), 'haaa do MMM yyyy')
 
   function deleteHandler() {
-    const url = `//localhost:8080/event/${event.id}`;
+    const url = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/event/${event.id}`;
     axios.delete(url)
       .then((result) => {
         console.log(result);

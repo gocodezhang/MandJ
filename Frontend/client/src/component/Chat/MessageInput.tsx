@@ -10,7 +10,7 @@ function MessageInput({ user }) {
     const [newMessage, setNewMessage] = useState('')
 
     function handleSubmitMessage() {
-        const url = `//localhost:8080/chat/${user.id}`;
+        const url = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/chat/${user.id}`;
         const data = new FormData();
         data.append('text', newMessage);
         axios.post(url, data)

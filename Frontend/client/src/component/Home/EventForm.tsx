@@ -82,7 +82,7 @@ function EventForm({ showForm, setShowForm, event }: Props) {
     for (const key in formObj) {
       data.append(key, formObj[key]);
     };
-    const url = event ? `//localhost:8080/event/${event.id}` : `//localhost:8080/event/${family.id}`;
+    const url = event ? `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/event/${event.id}` : `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/event/${family.id}`;
     axios({
       method: event ? 'put' : 'post',
       url: url,

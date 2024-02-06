@@ -19,7 +19,7 @@ function FamilyMessages({ user }) {
   const lastmessageRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
-    const url = `//localhost:8080/chat/${user.familyID}`;
+    const url = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/chat/${user.familyID}`;
     axios.get(url)
       .then(({ data }) => {
         setMessages(data)

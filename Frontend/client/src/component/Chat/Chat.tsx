@@ -9,7 +9,7 @@ function Chat() {
 
   return (
     <StompSessionProvider
-      url='ws://localhost:8080/mj-websocket'
+      url={`ws://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/mj-websocket`}
       onConnect={(frame) => console.log(`connected to ${frame}`)}
       onDisconnect={() => (console.log('disconnected'))}
       onWebSocketError={(err) => (console.log(err))}
