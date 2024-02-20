@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.swing.event.InternalFrameEvent;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,7 +17,7 @@ public class EventController {
     private EventRepository eventRepository;
     @Autowired
     private FamilyController familyController;
-    @PostMapping(path = "/{familyID}")
+    @PostMapping(path = "{familyID}")
     public String addEvent(@PathVariable Integer familyID, String name, String[] participants, Timestamp startTime, Timestamp endTime, String location) {
         Family family = familyController.getFamilyByID(familyID).get();
         Event event = new Event(name, participants, startTime, endTime, location, family);
@@ -26,17 +25,10 @@ public class EventController {
         eventRepository.save(event);
         return "the event is saved";
     }
-    @GetMapping(path = "/{familyID}")
+    @GetMapping(path = "{familyID}")
     public Iterable getEvents(@PathVariable Integer familyID) {
         Family family = familyController.getFamilyByID(familyID).get();
-        // remove participants for testing
-        List<Event> events = eventRepository.findEventsByFamily(family);
-        System.out.println("xyzhang-updated");
-        String[] dummyArray = new String[]{"testing1", "testing2"};
-        for (Event event : events) {
-            event.setParticipants(dummyArray);
-        }
-        return events;
+        return eventRepository.findEventsByFamily(family);
     }
 
     @PutMapping(path = "/{eventID}")
