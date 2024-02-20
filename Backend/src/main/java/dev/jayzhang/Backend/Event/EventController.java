@@ -17,7 +17,7 @@ public class EventController {
     private EventRepository eventRepository;
     @Autowired
     private FamilyController familyController;
-    @PostMapping(path = "{familyID}")
+    @PostMapping(path = "/{familyID}")
     public String addEvent(@PathVariable Integer familyID, String name, String[] participants, Timestamp startTime, Timestamp endTime, String location) {
         Family family = familyController.getFamilyByID(familyID).get();
         Event event = new Event(name, participants, startTime, endTime, location, family);
@@ -25,7 +25,7 @@ public class EventController {
         eventRepository.save(event);
         return "the event is saved";
     }
-    @GetMapping(path = "{familyID}")
+    @GetMapping(path = "/{familyID}")
     public Iterable getEvents(@PathVariable Integer familyID) {
         Family family = familyController.getFamilyByID(familyID).get();
         return eventRepository.findEventsByFamily(family);

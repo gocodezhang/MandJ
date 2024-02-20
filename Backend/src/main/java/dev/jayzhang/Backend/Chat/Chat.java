@@ -1,5 +1,6 @@
 package dev.jayzhang.Backend.Chat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.jayzhang.Backend.Family.Family;
 import dev.jayzhang.Backend.User.User;
 import jakarta.persistence.*;
@@ -29,6 +30,7 @@ public class Chat {
             name = "family_id",
             foreignKey = @ForeignKey(name = "FAMILY_CHAT_ID_FK")
     )
+    @JsonIgnore
     private Family familyChat;
     public Chat(String text, Timestamp createdAt, User user, Family family) {
         this.text = text;
