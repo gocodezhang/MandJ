@@ -1,6 +1,8 @@
 package dev.jayzhang.Backend.Family;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import dev.jayzhang.Backend.Event.Event;
 import dev.jayzhang.Backend.Photo.Photo;
 import dev.jayzhang.Backend.User.User;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,14 +27,11 @@ public class Family {
     private String name;
 
     @OneToMany(mappedBy = "familyUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "familyPhoto", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Photo> photos = new ArrayList<>();
     @OneToMany(mappedBy = "familyEvent", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Event> events = new ArrayList<>();
 
     public Family(String name) {
