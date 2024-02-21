@@ -16,11 +16,16 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `chat`
+-- Current Database: `familyspace`
 --
 
-CREATE DATABASE familyspace;
-USE familyspace;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `familyspace` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+USE `familyspace`;
+
+--
+-- Table structure for table `chat`
+--
 
 DROP TABLE IF EXISTS `chat`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -77,7 +82,7 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (1,'2023-08-14 16:00:00.000000','Funston Beach, CA','Nori Beach Hangout',_binary 'ï¿½\ï¿½\0ur\0[Ljava.lang.String;ï¿½\ï¿½V\ï¿½\ï¿½{G\0\0xp\0\0\0t\0Maria Hot\0	Jay Zhang','2023-08-14 12:00:00.000000',2),(2,'2023-08-14 20:00:00.000000','McCandless Park, Milpitas, CA','Nori Daily Fun',_binary 'ï¿½\ï¿½\0ur\0[Ljava.lang.String;ï¿½\ï¿½V\ï¿½\ï¿½{G\0\0xp\0\0\0t\0Maria Hot\0	Jay Zhang','2023-08-14 19:00:00.000000',2);
+INSERT INTO `event` VALUES (1,'2023-08-14 16:00:00.000000','Funston Beach, CA','Nori Beach Hangout',_binary '¬\í\0ur\0[Ljava.lang.String;­\ÒV\ç\é{G\0\0xp\0\0\0t\0Maria Hot\0	Jay Zhang','2023-08-14 12:00:00.000000',2),(2,'2023-08-14 20:00:00.000000','McCandless Park, Milpitas, CA','Nori Daily Fun',_binary '¬\í\0ur\0[Ljava.lang.String;­\ÒV\ç\é{G\0\0xp\0\0\0t\0Maria Hot\0	Jay Zhang','2023-08-14 19:00:00.000000',2);
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,10 +155,13 @@ CREATE TABLE `user` (
   `location` json DEFAULT NULL,
   `profile_photo` varchar(255) DEFAULT NULL,
   `family_id` int DEFAULT NULL,
+  `family_user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_ifpg93e07biojgn27b523a8t6` (`first_name`,`id`),
   KEY `FAMILY_USER_ID_FK` (`family_id`),
-  CONSTRAINT `FAMILY_USER_ID_FK` FOREIGN KEY (`family_id`) REFERENCES `family` (`id`)
+  KEY `FKamhjdsntwjx0lbh1i21jo1j2h` (`family_user_id`),
+  CONSTRAINT `FAMILY_USER_ID_FK` FOREIGN KEY (`family_id`) REFERENCES `family` (`id`),
+  CONSTRAINT `FKamhjdsntwjx0lbh1i21jo1j2h` FOREIGN KEY (`family_user_id`) REFERENCES `family` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -163,7 +171,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,28,2,'Jay','male','Zhang','{\"latitude\": 37.40986, \"longitude\": -121.89784}','https://res.cloudinary.com/dr7v4uirr/image/upload/v1703266631/vfdmjpzgwfjpvyhcg0uz.png',2),(3,27,2,'Maria','female','Ho','{\"latitude\": 37.38289, \"longitude\": -122.03645}','https://res.cloudinary.com/dr7v4uirr/image/upload/v1692028830/female_profile_cxzv5b.png',2);
+INSERT INTO `user` VALUES (2,28,2,'Jay','male','Zhang','{\"latitude\": 37.409798, \"longitude\": -121.89792}','https://res.cloudinary.com/dr7v4uirr/image/upload/v1703266631/vfdmjpzgwfjpvyhcg0uz.png',2,NULL),(3,27,2,'Maria','female','Ho','{\"latitude\": 37.38289, \"longitude\": -122.03645}','https://res.cloudinary.com/dr7v4uirr/image/upload/v1692028830/female_profile_cxzv5b.png',2,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -176,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-24 21:03:32
+-- Dump completed on 2024-02-20 21:09:30
