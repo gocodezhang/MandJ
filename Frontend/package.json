@@ -6,7 +6,8 @@
   "scripts": {
     "test": "",
     "client-dev": "npx webpack --watch",
-    "server": "nodemon server/index.ts"
+    "server": "nodemon server/index.ts",
+    "client": "npx webpack --watch & npx nodemon server/index.ts"
   },
   "repository": {
     "type": "git",
