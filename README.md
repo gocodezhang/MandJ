@@ -60,6 +60,7 @@
 The UI will map exactly to the core features. The UI would contains three tabs - Home, Chat, Map.
 
 ### Home
+Home has three main components:
 * **Family Members**: It is the profile section which contains yourself and your family members 
 * **Photo Gallery**: It is an image carousel displaying your family's photos
 * **Events**: It is the section for you to plan and see upcoming family events
@@ -68,8 +69,7 @@ It is a chat room for you and your family powered by websocket
 ### Map
 It is a real-time map sharing you and your family locations after the user's consent
 
-
-Please see below vidoe for a quick demo
+*Please see below vidoe for a quick demo*
 
 https://github.com/user-attachments/assets/68ebc54f-80da-460e-a0d6-87785fe9d921
 
