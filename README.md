@@ -55,7 +55,7 @@
 
 
 
-## Frontend (WIP)
+## Frontend
 
 The UI will map exactly to the core features. The UI would contains three tabs - Home, Chat, Map.
 
@@ -64,7 +64,8 @@ The UI will map exactly to the core features. The UI would contains three tabs -
 * **Photo Gallery**: It is an image carousel displaying your family's photos
 * **Events**: It is the section for you to plan and see upcoming family events
 
-![](Asset/MandJ_demo.gif)
+https://github.com/user-attachments/assets/68ebc54f-80da-460e-a0d6-87785fe9d921
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
