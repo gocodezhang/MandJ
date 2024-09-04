@@ -31,7 +31,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-**FamilySpace** is a web application aimed to build a small social space for your family. Given the mass amount of information in various social media, we would like to create an intimate space for you to connect with your closest people.
+**FamilySpace** is a web application aimed to build a small social space for your family. Given the mass amount of information in various social media, we would like to create an intimate space for you to connect with your family.
 
 ### Core Features
 
@@ -57,9 +57,14 @@
 
 ## Frontend (WIP)
 
-The UI will map exactly to the core features. The UI would contains three tabs - Home, Chat, Map. The UI portion is still working in progress but please note below current UI for a proof of concept.
+The UI will map exactly to the core features. The UI would contains three tabs - Home, Chat, Map.
 
-<img src="Asset/FamilSpace POC.png">
+### Home
+* **Family Members**: It is the profile section which contains yourself and your family members 
+* **Photo Gallery**: It is an image carousel displaying your family's photos
+* **Events**: It is the section for you to plan and see upcoming family events
+
+![](Asset/MandJ_demo.gif)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
